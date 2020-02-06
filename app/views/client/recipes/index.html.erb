@@ -1,10 +1,13 @@
 <h1>All Recipes</h1>
 
 <% @recipes.each do |recipe| %>
-  <h2> <%=recipe["title"]%> </h2>
+  <h2> <a href="/client/recipes/<%= recipe["id"] %>"> <%= recipe["title"] %> </a> </h2>
   <h3> <%=recipe["chef"]%> </h3>
   <h3> <%=recipe["formatted"]["prep_time"]%> </h3>
   <h4> <%=recipe["ingredients"]%> </h4>
   <h5> <%=recipe["directions"]%> </h5>
   <br>
 <% end %>
+
+
+  

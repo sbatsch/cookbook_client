@@ -22,8 +22,9 @@ class Client::RecipesController < ApplicationController
                         "http://localhost:3000/api/recipes", 
                         form: client_params
                         )
-    
-    render "create.html.erb"
+    recipe = response.parse
+
+    redirect_to "/client/recipes/#{recipe["id"]}"
   end
 
   def show
@@ -32,4 +33,27 @@ class Client::RecipesController < ApplicationController
     render 'show.html.erb'
   end
 
+  def edit
+    response = HTTP.get("http://localhost:3000/api/recipes/#{ params[:id] }" )
+    @recipe = response.parse 
+    # @recipe_id = params[:id]
+    render 'edit.html.erb'
+  end
+
+  def update
+    client_params ={
+                  title: params[:title],
+                  prep_time: params[:prep_time],
+                  ingredients: params[:ingredients],
+                  directions: params[:directions],
+                  image_url: params[:image_url]
+                  }
+
+    response = HTTP.patch(
+                        "http://localhost:3000/api/recipes/#{params[:id]}", 
+                        form: client_params
+                        )
+    recipe = response.parse
+    redirect_to "/client/recipes/#{ recipe["id"] }"
+  end
 end

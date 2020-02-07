@@ -23,7 +23,6 @@ class Client::RecipesController < ApplicationController
                         form: client_params
                         )
     recipe = response.parse
-
     redirect_to "/client/recipes/#{recipe["id"]}"
   end
 
@@ -55,5 +54,10 @@ class Client::RecipesController < ApplicationController
                         )
     recipe = response.parse
     redirect_to "/client/recipes/#{ recipe["id"] }"
+  end
+
+  def destroy
+    response = HTTP.delete("http://localhost:3000/api/recipes/#{ params[:id] }")
+    redirect_to '/client/recipes'
   end
 end

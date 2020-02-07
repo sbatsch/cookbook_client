@@ -20,6 +20,10 @@
 
 <div>
   <a href="/client/recipes/<%= @recipe["id"] %>/edit">Edit</a>
+  
+  <%= form_tag "/client/recipes/#{ @recipe["id"] }", method: :delete do %>
+      <input type="submit" value="Delete">
+    <%end%>
 </div>
 
 <img src="<%= @recipe["image_url"]%>" >
